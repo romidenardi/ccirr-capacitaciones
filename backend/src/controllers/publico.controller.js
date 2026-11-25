@@ -5,6 +5,7 @@ import { httpError } from '../utils/httpError.js';
 import { soloDigitos } from '../utils/cuit.js';
 import { detectarTipo, guardarArchivo, borrarArchivo } from '../utils/archivos.js';
 import { montoAPagar, estadoPagoInicial, generarToken } from '../utils/inscripcion.js';
+import { empresaParaCuit } from '../services/empresas.service.js';
 
 // Lo que ve cualquier persona de una capacitación publicada. El link virtual NO se muestra acá:
 // llega solo a las personas inscriptas (por mail y en su acceso personal).
@@ -60,19 +61,6 @@ export const buscarEmpresaPorCuit = asyncHandler(async (req, res) => {
   if (!empresa) return res.json({ encontrada: false });
   res.json({ encontrada: true, nombre: empresa.nombre, esSocia: empresa.esSocia && !empresa.pendienteRevision });
 });
-
-// Empresa de la inscripción: la existente con ese CUIT o una nueva "a revisar".
-// Si el nombre ya lo usa otra empresa (con otro CUIT), se le agrega el CUIT para no chocar.
-const empresaParaCuit = async ({ cuit, organizacion }, transaction) => {
-  const existente = await Empresa.findOne({ where: { cuit }, transaction, lock: transaction.LOCK.UPDATE });
-  if (existente) return existente;
-
-  let nombre = organizacion;
-  if (await Empresa.findOne({ where: { nombre }, transaction })) {
-    nombre = `${organizacion} (CUIT ${cuit.slice(0, 2)}-${cuit.slice(2, 10)}-${cuit.slice(10)})`;
-  }
-  return Empresa.create({ nombre, cuit, esSocia: false, pendienteRevision: true }, { transaction });
-};
 
 export const crearInscripcion = asyncHandler(async (req, res) => {
   const b = req.body;

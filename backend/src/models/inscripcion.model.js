@@ -29,7 +29,8 @@ const Inscripcion = sequelize.define(
     comoSeEntero: { type: DataTypes.ENUM(...CANALES), allowNull: true },
     comprobantePagoUrl: { type: DataTypes.STRING(500), allowNull: true },
     estadoPago: { type: DataTypes.ENUM(...ESTADOS_PAGO), allowNull: false, defaultValue: 'no_corresponde' },
-    asistio: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+    // Si el pago se rechazó: el motivo (se usa en el mail que recibe la persona)
+    motivoRechazo: { type: DataTypes.STRING(500), allowNull: true },
     // Token del link personal que recibe por mail para ver su inscripción, material y certificado
     tokenAcceso: { type: DataTypes.STRING(64), allowNull: false, unique: true },
     // Código que se imprime en el certificado para validarlo

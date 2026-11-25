@@ -1,4 +1,4 @@
-import { Capacitacion, Clase, Material, Inscripcion, sequelize } from '../models/index.js';
+import { Asistencia, Capacitacion, Clase, Material, Inscripcion, sequelize } from '../models/index.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { httpError } from '../utils/httpError.js';
 import { pick } from '../utils/pick.js';
@@ -66,7 +66,15 @@ const guardarClases = async (capacitacionId, clasesRecibidas, transaction) => {
 
   const idsRecibidos = new Set(clases.filter((c) => c.id).map((c) => c.id));
   for (const existente of existentes) {
-    if (!idsRecibidos.has(existente.id)) await existente.destroy({ transaction });
+    if (idsRecibidos.has(existente.id)) continue;
+    const conAsistencia = await Asistencia.count({ where: { claseId: existente.id }, transaction });
+    if (conAsistencia > 0) {
+      throw httpError(
+        `No se puede quitar la clase del ${existente.fecha.split('-').reverse().join('/')} porque ya tiene asistencia registrada.`,
+        409,
+      );
+    }
+    await existente.destroy({ transaction });
   }
 
   for (const { id, ...datos } of clases) {
