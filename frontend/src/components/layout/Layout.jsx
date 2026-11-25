@@ -2,7 +2,8 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import './Layout.css';
 
-// Estructura común a todas las pantallas: barra superior institucional, contenido y pie
+// Estructura común a todas las pantallas: barra superior institucional, contenido y pie.
+// Con sesión de administración, la barra muestra las secciones de gestión; sin sesión, los accesos públicos.
 function Layout() {
   const { usuario, logout } = useAuth();
 
@@ -15,13 +16,20 @@ function Layout() {
             <span className="layout__marca-seccion">Capacitaciones</span>
           </NavLink>
           <nav className="layout__nav" aria-label="Secciones">
-            <NavLink to="/admin/capacitaciones">Administración</NavLink>
-            <NavLink to="/mi-inscripcion">Mi inscripción</NavLink>
-            <NavLink to="/empresas">Empresas</NavLink>
-            {usuario && (
-              <button type="button" className="layout__salir" onClick={logout} title={`Sesión de ${usuario.nombre}`}>
-                Salir
-              </button>
+            {usuario ? (
+              <>
+                <NavLink to="/admin/capacitaciones">Capacitaciones</NavLink>
+                <NavLink to="/admin/empresas">Empresas</NavLink>
+                <button type="button" className="layout__salir" onClick={logout} title={`Sesión de ${usuario.nombre}`}>
+                  Salir
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink to="/mi-inscripcion">Mi inscripción</NavLink>
+                <NavLink to="/acceso-empresas">Acceso empresas</NavLink>
+                <NavLink to="/login">Ingresar</NavLink>
+              </>
             )}
           </nav>
         </div>

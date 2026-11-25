@@ -81,3 +81,15 @@
     margin-left: 0;
   }
 }
+
+.cap-form__seccion--lista {
+  display: block;
+  margin-top: 3rem;
+}
+
+.cap-form__titulo-seccion {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--verde-claro);
+  font-size: 1.25rem;
+}
