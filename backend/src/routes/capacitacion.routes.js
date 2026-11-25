@@ -15,11 +15,24 @@ const router = Router();
 
 const optionalCost = (field) =>
   body(field)
-    .optional({ values: 'null' })
+    .optional({ values: 'falsy' })
     .isFloat({ min: 0 })
     .withMessage('El costo tiene que ser un número positivo.');
 
+const HORA = /^([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$/;
+
 const commonRules = [
+  body('horaInicio').optional().matches(HORA).withMessage('El horario de inicio no es válido.'),
+  body('horaFin').optional({ values: 'falsy' }).matches(HORA).withMessage('El horario de fin no es válido.'),
+  body('horaFin')
+    .optional({ values: 'falsy' })
+    .custom((fin, { req }) => !req.body.horaInicio || fin > req.body.horaInicio)
+    .withMessage('El horario de fin tiene que ser posterior al de inicio.'),
+  body('cupo').optional({ values: 'falsy' }).isInt({ min: 1 }).withMessage('El cupo tiene que ser un número entero.'),
+  body(['exclusivoSocios', 'entregaMaterial', 'entregaCertificado'])
+    .optional()
+    .isBoolean()
+    .withMessage('Valor no válido.'),
   body('fecha').optional().isISO8601().withMessage('La fecha no es válida.'),
   body('modalidad').optional().isIn(MODALIDADES).withMessage('Modalidad no válida.'),
   body('estado').optional().isIn(ESTADOS_CAPACITACION).withMessage('Estado no válido.'),

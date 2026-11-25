@@ -3,6 +3,7 @@ import { asyncHandler } from '../utils/asyncHandler.js';
 import { httpError } from '../utils/httpError.js';
 import { pick } from '../utils/pick.js';
 import { slugify } from '../utils/slug.js';
+import { normalizarCapacitacion } from '../utils/normalizarCapacitacion.js';
 
 const CAMPOS = [
   'nombre',
@@ -41,7 +42,19 @@ const uniqueSlug = async (nombre, excludeId) => {
 };
 
 export const listCapacitaciones = asyncHandler(async (req, res) => {
-  const capacitaciones = await Capacitacion.findAll({ order: [['fecha', 'DESC']] });
+  const capacitaciones = await Capacitacion.findAll({
+    order: [['fecha', 'DESC']],
+    attributes: {
+      include: [
+        [
+          Capacitacion.sequelize.literal(
+            '(SELECT COUNT(*) FROM inscripciones WHERE inscripciones.capacitacion_id = Capacitacion.id)',
+          ),
+          'inscriptos',
+        ],
+      ],
+    },
+  });
   res.json(capacitaciones);
 });
 
@@ -50,7 +63,7 @@ export const getCapacitacion = asyncHandler(async (req, res) => {
 });
 
 export const createCapacitacion = asyncHandler(async (req, res) => {
-  const data = pick(req.body, CAMPOS);
+  const data = normalizarCapacitacion(pick(req.body, CAMPOS));
   data.slug = await uniqueSlug(data.nombre);
   const capacitacion = await Capacitacion.create(data);
   res.status(201).json(capacitacion);
@@ -58,7 +71,7 @@ export const createCapacitacion = asyncHandler(async (req, res) => {
 
 export const updateCapacitacion = asyncHandler(async (req, res) => {
   const capacitacion = await findCapacitacion(req.params.id);
-  const data = pick(req.body, CAMPOS);
+  const data = normalizarCapacitacion(pick(req.body, CAMPOS), capacitacion);
   // El link público no cambia si ya hay inscriptos (lo pudieron haber compartido)
   if (data.nombre && data.nombre !== capacitacion.nombre) {
     const inscriptos = await Inscripcion.count({ where: { capacitacionId: capacitacion.id } });

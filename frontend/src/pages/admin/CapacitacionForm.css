@@ -1,0 +1,83 @@
+.cap-form {
+  max-width: 48rem;
+}
+
+.cap-form__link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--fondo-suave);
+  border-radius: var(--radio);
+}
+
+.cap-form__link .campo__etiqueta {
+  width: 100%;
+}
+
+.cap-form__link code {
+  font-family: inherit;
+  color: var(--verde-oscuro);
+  word-break: break-all;
+}
+
+.cap-form__seccion {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  border: 0;
+}
+
+.cap-form__seccion legend {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0 0 0.5rem;
+  border-bottom: 2px solid var(--verde-claro);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--verde-oscuro);
+}
+
+.cap-form__ancho {
+  grid-column: 1 / -1;
+}
+
+.cap-form__par {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.cap-form__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cap-form__eliminar {
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #b03a2e;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .cap-form__seccion {
+    grid-template-columns: 1fr;
+  }
+
+  .cap-form__eliminar {
+    margin-left: 0;
+  }
+}

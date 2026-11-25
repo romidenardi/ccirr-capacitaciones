@@ -1,8 +1,9 @@
 ### Pedidos de prueba para la API. Con la extensión "REST Client" de VS Code aparece
 ### un link "Send Request" arriba de cada uno: al hacer clic, se ve la respuesta al costado.
 ###
-### Las rutas de capacitaciones piden sesión: primero mandá "Ingresar" (con tu mail y
-### contraseña de administración). El token que devuelve se usa solo en los pedidos siguientes.
+### Las rutas de capacitaciones piden sesión: primero mandá "Ingresar".
+### El mail y la contraseña se leen de backend/.env (PRUEBAS_EMAIL y PRUEBAS_PASSWORD),
+### que no se sube a GitHub. Nunca escribas la contraseña en este archivo.
 
 @api = http://localhost:3000
 
@@ -15,8 +16,8 @@ POST {{api}}/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "comunicacion@ccirr.org.ar",
-  "password": "admin2026comu"
+  "email": "{{$dotenv PRUEBAS_EMAIL}}",
+  "password": "{{$dotenv PRUEBAS_PASSWORD}}"
 }
 
 ###

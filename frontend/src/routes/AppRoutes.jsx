@@ -4,6 +4,7 @@ import RutaProtegida from './RutaProtegida.jsx';
 import Inicio from '../pages/Inicio.jsx';
 import Login from '../pages/Login.jsx';
 import Capacitaciones from '../pages/admin/Capacitaciones.jsx';
+import CapacitacionForm from '../pages/admin/CapacitacionForm.jsx';
 import Inscripcion from '../pages/publico/Inscripcion.jsx';
 import MiInscripcion from '../pages/asistentes/MiInscripcion.jsx';
 import Empresas from '../pages/empresas/Empresas.jsx';
@@ -23,6 +24,8 @@ function AppRoutes() {
         {/* Administración: piden sesión iniciada */}
         <Route element={<RutaProtegida />}>
           <Route path="/admin/capacitaciones" element={<Capacitaciones />} />
+          <Route path="/admin/capacitaciones/nueva" element={<CapacitacionForm />} />
+          <Route path="/admin/capacitaciones/:id" element={<CapacitacionForm />} />
         </Route>
 
         <Route path="*" element={<NoEncontrada />} />

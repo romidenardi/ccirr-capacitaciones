@@ -162,3 +162,66 @@ a {
   opacity: 0.6;
   cursor: default;
 }
+
+.campo__ayuda {
+  font-size: 0.875rem;
+  color: var(--texto-suave);
+  margin: 0;
+}
+
+.casilla {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  cursor: pointer;
+}
+
+.casilla input {
+  width: 1.125rem;
+  height: 1.125rem;
+  accent-color: var(--verde);
+}
+
+.mensaje-ok {
+  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--verde);
+  background: #e8f6f1;
+}
+
+/* Etiqueta de estado (borrador, publicada…) */
+.estado {
+  display: inline-block;
+  padding: 0.125rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  background: var(--fondo-suave);
+  color: var(--texto-suave);
+}
+
+.estado--publicada {
+  background: #dff5ee;
+  color: var(--verde-oscuro);
+}
+
+.estado--cancelada {
+  background: #fdf0ee;
+  color: #9b2f24;
+}
+
+.encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.encabezado h1 {
+  margin: 0;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
