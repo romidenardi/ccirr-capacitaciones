@@ -1,8 +1,11 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext.jsx';
 import './Layout.css';
 
 // Estructura común a todas las pantallas: barra superior institucional, contenido y pie
 function Layout() {
+  const { usuario, logout } = useAuth();
+
   return (
     <div className="layout">
       <header className="layout__barra">
@@ -15,6 +18,11 @@ function Layout() {
             <NavLink to="/admin/capacitaciones">Administración</NavLink>
             <NavLink to="/mi-inscripcion">Mi inscripción</NavLink>
             <NavLink to="/empresas">Empresas</NavLink>
+            {usuario && (
+              <button type="button" className="layout__salir" onClick={logout} title={`Sesión de ${usuario.nombre}`}>
+                Salir
+              </button>
+            )}
           </nav>
         </div>
       </header>

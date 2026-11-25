@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getCapacitaciones } from '../../api/capacitaciones.api.js';
+import { mensajeDeError } from '../../api/axios.js';
 import { formatearFecha, formatearHora, formatearModalidad, formatearEstado } from '../../utils/formato.js';
 
 // Listado de capacitaciones (administración). El alta y la edición se suman en el próximo paso.
@@ -11,7 +12,7 @@ function Capacitaciones() {
   useEffect(() => {
     getCapacitaciones()
       .then(setCapacitaciones)
-      .catch(() => setError('No se pudo conectar con el servidor. Revisá que el backend esté corriendo.'))
+      .catch((err) => setError(mensajeDeError(err)))
       .finally(() => setCargando(false));
   }, []);
 

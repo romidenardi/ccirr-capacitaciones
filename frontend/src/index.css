@@ -126,3 +126,39 @@ a {
     animation: none !important;
   }
 }
+
+/* Campos de formulario */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.campo__etiqueta {
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  font: inherit;
+  color: var(--texto);
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--gris);
+  border-radius: var(--radio);
+  background: #fff;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  border-color: var(--verde);
+  outline: 2px solid var(--verde-claro);
+  outline-offset: 0;
+}
+
+.boton:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

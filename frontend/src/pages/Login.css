@@ -1,0 +1,19 @@
+.login {
+  max-width: 24rem;
+  margin: 1rem auto 0;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.login__form .boton {
+  align-self: flex-start;
+}
+
+.login__form .mensaje-error {
+  margin: 0;
+}

@@ -8,6 +8,7 @@ import {
   deleteCapacitacion,
 } from '../controllers/capacitacion.controller.js';
 import { validate } from '../middlewares/validate.middleware.js';
+import { requireAuth } from '../middlewares/auth.middleware.js';
 import { MODALIDADES, ESTADOS_CAPACITACION } from '../models/capacitacion.model.js';
 
 const router = Router();
@@ -39,7 +40,10 @@ const updateRules = [
   ...commonRules,
 ];
 
-// TODO (próximo paso): proteger estas rutas con login de administración
+// Todas las rutas de capacitaciones son de administración: piden sesión iniciada.
+// (El formulario público de inscripción va a tener sus propias rutas, sin login.)
+router.use(requireAuth);
+
 router.get('/', listCapacitaciones);
 router.get('/:id', getCapacitacion);
 router.post('/', createRules, validate, createCapacitacion);

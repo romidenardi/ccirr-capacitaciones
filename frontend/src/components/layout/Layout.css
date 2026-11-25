@@ -40,6 +40,7 @@
 
 .layout__nav {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
   flex-wrap: wrap;
 }
@@ -49,6 +50,20 @@
   text-decoration: none;
   padding: 0.25rem 0;
   border-bottom: 2px solid transparent;
+}
+
+.layout__salir {
+  padding: 0.25rem 0.875rem;
+  border: 1px solid var(--verde-claro);
+  border-radius: var(--radio);
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.layout__salir:hover {
+  background: var(--verde);
 }
 
 .layout__nav a:hover,

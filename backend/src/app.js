@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import authRoutes from './routes/auth.routes.js';
 import capacitacionRoutes from './routes/capacitacion.routes.js';
 import { errorMiddleware } from './middlewares/error.middleware.js';
 import { sequelize } from './models/index.js';
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/api/auth', authRoutes);
 app.use('/api/capacitaciones', capacitacionRoutes);
 
 app.use((req, res) => res.status(404).json({ message: 'Ruta no encontrada.' }));

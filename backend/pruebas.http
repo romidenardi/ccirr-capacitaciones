@@ -1,14 +1,34 @@
 ### Pedidos de prueba para la API. Con la extensión "REST Client" de VS Code aparece
 ### un link "Send Request" arriba de cada uno: al hacer clic, se ve la respuesta al costado.
+###
+### Las rutas de capacitaciones piden sesión: primero mandá "Ingresar" (con tu mail y
+### contraseña de administración). El token que devuelve se usa solo en los pedidos siguientes.
+
+@api = http://localhost:3000
 
 ### Estado del servidor
-GET http://localhost:3000/health
+GET {{api}}/health
+
+### Ingresar
+# @name login
+POST {{api}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "comunicacion@ccirr.org.ar",
+  "password": "admin2026comu"
+}
+
+###
+@token = {{login.response.body.token}}
 
 ### Listar capacitaciones
-GET http://localhost:3000/api/capacitaciones
+GET {{api}}/api/capacitaciones
+Authorization: Bearer {{token}}
 
 ### Crear una capacitación de prueba
-POST http://localhost:3000/api/capacitaciones
+POST {{api}}/api/capacitaciones
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
