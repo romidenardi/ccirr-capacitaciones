@@ -1,0 +1,178 @@
+.inscripcion {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 3rem;
+  align-items: start;
+}
+
+.inscripcion--mensaje {
+  display: block;
+  max-width: 40rem;
+}
+
+/* Columna de la capacitación: queda fija al costado mientras se completa el formulario */
+.inscripcion__resumen {
+  position: sticky;
+  top: 1.5rem;
+  padding: 1.75rem;
+  background: var(--verde-oscuro);
+  border-radius: var(--radio);
+  color: #fff;
+}
+
+.inscripcion__resumen h1 {
+  color: #fff;
+  font-size: 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.inscripcion__subtitulo {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 0.9375rem;
+  color: var(--verde-claro);
+}
+
+.inscripcion__clases {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.inscripcion__clases li {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.875rem;
+  border-left: 2px solid var(--verde-claro);
+}
+
+.inscripcion__clases .texto-suave {
+  color: #c8e6dd;
+}
+
+.inscripcion__clase-fecha {
+  font-weight: 700;
+}
+
+.inscripcion__clase-fecha::first-letter {
+  text-transform: uppercase;
+}
+
+.inscripcion__texto {
+  margin: 0;
+  white-space: pre-line;
+}
+
+.inscripcion__costo {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.inscripcion__entregas {
+  margin: 1.25rem 0 0;
+  color: #c8e6dd;
+}
+
+/* Formulario */
+.inscripcion__grupo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  border: 0;
+}
+
+.inscripcion__grupo legend {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0 0 0.5rem;
+  border-bottom: 2px solid var(--verde-claro);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--verde-oscuro);
+}
+
+.inscripcion__ancho {
+  grid-column: 1 / -1;
+}
+
+.inscripcion__grupo .mensaje-error,
+.inscripcion__grupo .texto-suave {
+  margin: 0;
+}
+
+.inscripcion__organizacion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: var(--fondo-suave);
+  border-radius: var(--radio);
+}
+
+.inscripcion__opciones {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.inscripcion__monto {
+  margin: 0;
+  font-size: 1.0625rem;
+}
+
+.inscripcion__instrucciones {
+  margin: 0;
+  padding: 0.875rem 1rem;
+  background: var(--fondo-suave);
+  border-radius: var(--radio);
+  font-family: inherit;
+  white-space: pre-wrap;
+}
+
+.inscripcion__consentimiento {
+  align-items: flex-start;
+  font-size: 0.9375rem;
+}
+
+.inscripcion__consentimiento input {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.inscripcion__enviar {
+  font-size: 1.0625rem;
+  padding: 0.75rem 2rem;
+}
+
+/* Campo trampa: fuera de la pantalla (no con display:none, que algunos robots detectan) */
+.inscripcion__trampa {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@media (max-width: 860px) {
+  .inscripcion {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .inscripcion__resumen {
+    position: static;
+  }
+}
+
+@media (max-width: 520px) {
+  .inscripcion__grupo {
+    grid-template-columns: 1fr;
+  }
+}

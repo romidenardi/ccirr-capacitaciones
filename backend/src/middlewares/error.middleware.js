@@ -15,6 +15,15 @@ export const errorMiddleware = (err, req, res, next) => {
     return res.status(400).json({ message: `Revisá estos datos: ${fields.join(', ')}` });
   }
 
+  if (err.name === 'MulterError') {
+    const mensajes = {
+      LIMIT_FILE_SIZE: 'El archivo supera los 5 MB. Probá con una foto o un PDF más liviano.',
+      LIMIT_FILE_COUNT: 'Adjuntá un solo archivo.',
+      LIMIT_UNEXPECTED_FILE: 'Adjuntá un solo archivo.',
+    };
+    return res.status(400).json({ message: mensajes[err.code] || 'No se pudo recibir el archivo.' });
+  }
+
   const status = err.status || 500;
   // Sin el error completo en el log: los de Sequelize traen la consulta con datos personales
   if (status >= 500) console.error(`[error] ${where} ·`, err.name, err.message);

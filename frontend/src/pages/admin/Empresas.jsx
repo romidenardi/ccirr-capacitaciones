@@ -54,6 +54,7 @@ function Empresas() {
             <option value="">Todas</option>
             <option value="si">Socias</option>
             <option value="no">No socias</option>
+            <option value="revisar">A revisar</option>
           </select>
         </label>
       </div>
@@ -87,7 +88,15 @@ function Empresas() {
                   </td>
                   <td>{e.rubro}</td>
                   <td>{formatearCuit(e.cuit)}</td>
-                  <td>{e.esSocia ? <span className="estado estado--publicada">Socia</span> : 'No'}</td>
+                  <td>
+                    {e.pendienteRevision ? (
+                      <span className="estado estado--revisar">A revisar</span>
+                    ) : e.esSocia ? (
+                      <span className="estado estado--publicada">Socia</span>
+                    ) : (
+                      'No'
+                    )}
+                  </td>
                   <td>{e.inscriptos ?? 0}</td>
                 </tr>
               ))}

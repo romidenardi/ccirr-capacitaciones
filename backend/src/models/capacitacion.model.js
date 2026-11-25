@@ -18,6 +18,10 @@ const Capacitacion = sequelize.define(
     exclusivoSocios: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
     costoSocios: { type: DataTypes.DECIMAL(12, 2), allowNull: true },
     costoNoSocios: { type: DataTypes.DECIMAL(12, 2), allowNull: true },
+    // Si hay que pagar, exige adjuntar el comprobante al inscribirse (si no, queda "pago pendiente")
+    pagoObligatorio: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+    // Alias, CBU, titular… se muestran en el formulario de inscripción cuando hay que pagar
+    instruccionesPago: { type: DataTypes.TEXT, allowNull: true },
     entregaMaterial: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
     entregaCertificado: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
     // Porcentaje de clases al que hay que asistir para recibir el certificado (1 a 100)

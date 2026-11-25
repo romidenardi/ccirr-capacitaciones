@@ -6,6 +6,7 @@ export const VALORES_INICIALES_EMPRESA = {
   cuit: '',
   emailContacto: '',
   esSocia: false,
+  pendienteRevision: false,
 };
 
 // "20123456786" → "20-12345678-6" (si no tiene 11 dígitos, lo deja como está)
@@ -21,4 +22,5 @@ export const empresaAFormulario = (e) => ({
   cuit: formatearCuit(e.cuit),
   emailContacto: e.emailContacto ?? '',
   esSocia: Boolean(e.esSocia),
+  pendienteRevision: Boolean(e.pendienteRevision),
 });

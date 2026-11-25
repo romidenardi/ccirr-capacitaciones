@@ -6,7 +6,7 @@ import { httpError } from '../utils/httpError.js';
 import { pick } from '../utils/pick.js';
 import { soloDigitos } from '../utils/cuit.js';
 
-const CAMPOS = ['nombre', 'rubro', 'cuit', 'emailContacto', 'esSocia'];
+const CAMPOS = ['nombre', 'rubro', 'cuit', 'emailContacto', 'esSocia', 'pendienteRevision'];
 
 const textoOpcional = (valor) =>
   valor === null || valor === undefined || String(valor).trim() === '' ? null : String(valor).trim();
@@ -39,7 +39,7 @@ const findEmpresa = async (id) => {
   return empresa;
 };
 
-// Listado con búsqueda (?q=texto, busca en nombre, rubro y CUIT) y filtro (?socia=si|no)
+// Listado con búsqueda (?q=texto, busca en nombre, rubro y CUIT) y filtro (?socia=si|no|revisar)
 export const listEmpresas = asyncHandler(async (req, res) => {
   const where = {};
   const q = String(req.query.q || '').trim();
@@ -51,6 +51,10 @@ export const listEmpresas = asyncHandler(async (req, res) => {
   }
   if (req.query.socia === 'si') where.esSocia = true;
   if (req.query.socia === 'no') where.esSocia = false;
+  if (req.query.socia === 'revisar') {
+    delete where.esSocia;
+    where.pendienteRevision = true;
+  }
 
   const empresas = await Empresa.findAll({
     where,

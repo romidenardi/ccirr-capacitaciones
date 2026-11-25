@@ -16,12 +16,16 @@ const Inscripcion = sequelize.define(
     apellido: { type: DataTypes.STRING(100), allowNull: false },
     // Lo que la persona escribió en el formulario; empresaId la vincula con la empresa cargada
     organizacion: { type: DataTypes.STRING(200), allowNull: false },
+    // CUIT de la organización (o CUIT/CUIL propio si se inscribe a título personal), solo números
+    cuit: { type: DataTypes.STRING(11), allowNull: true },
     cargo: { type: DataTypes.STRING(120), allowNull: false },
     dni: { type: DataTypes.STRING(15), allowNull: true },
     fechaNacimiento: { type: DataTypes.DATEONLY, allowNull: true },
     telefono: { type: DataTypes.STRING(40), allowNull: false },
     email: { type: DataTypes.STRING(200), allowNull: false, validate: { isEmail: true } },
     esSocio: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+    // Lo que tenía que pagar al momento de inscribirse (null = sin costo). No cambia si después cambia el precio.
+    monto: { type: DataTypes.DECIMAL(12, 2), allowNull: true },
     comoSeEntero: { type: DataTypes.ENUM(...CANALES), allowNull: true },
     comprobantePagoUrl: { type: DataTypes.STRING(500), allowNull: true },
     estadoPago: { type: DataTypes.ENUM(...ESTADOS_PAGO), allowNull: false, defaultValue: 'no_corresponde' },
@@ -30,6 +34,8 @@ const Inscripcion = sequelize.define(
     tokenAcceso: { type: DataTypes.STRING(64), allowNull: false, unique: true },
     // Código que se imprime en el certificado para validarlo
     codigoCertificado: { type: DataTypes.STRING(20), allowNull: true, unique: true },
+    // Cuándo aceptó el uso de sus datos personales
+    consentimientoAt: { type: DataTypes.DATE, allowNull: true },
   },
   {
     tableName: 'inscripciones',

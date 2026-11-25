@@ -54,7 +54,7 @@ const commonRules = [
     .optional({ values: 'falsy' })
     .isInt({ min: 1, max: 100 })
     .withMessage('La asistencia mínima tiene que ser un porcentaje entre 1 y 100.'),
-  body(['exclusivoSocios', 'entregaMaterial', 'entregaCertificado'])
+  body(['exclusivoSocios', 'entregaMaterial', 'entregaCertificado', 'pagoObligatorio'])
     .optional()
     .isBoolean()
     .withMessage('Valor no válido.'),

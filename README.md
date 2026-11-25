@@ -134,4 +134,8 @@ Variables del backend en Railway:
 | `JWT_SECRET`                                    | una clave nueva (no la de tu compu)           |
 | `NODE_ENV`                                      | `production`                                  |
 | `APP_URL` y `CORS_ORIGIN`                       | la dirección del frontend en Vercel           |
+| `UPLOADS_DIR`                                   | `/data/uploads` (carpeta dentro del volumen)  |
 | `ADMIN_INICIAL_EMAIL` / `_PASSWORD` / `_NOMBRE` | solo para el primer arranque; después, borrar |
+
+Archivos subidos (comprobantes, material): se guardan en un **volumen** de Railway montado en `/data`
+en el servicio del backend. Sin volumen, los archivos se borran en cada deploy.

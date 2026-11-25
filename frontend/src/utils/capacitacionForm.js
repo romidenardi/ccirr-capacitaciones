@@ -47,6 +47,8 @@ export const VALORES_INICIALES = {
   exclusivoSocios: false,
   costoSocios: '',
   costoNoSocios: '',
+  pagoObligatorio: false,
+  instruccionesPago: '',
   entregaMaterial: false,
   entregaCertificado: false,
   asistenciaMinima: '75',
@@ -78,6 +80,8 @@ export const aFormulario = (c) => ({
   exclusivoSocios: Boolean(c.exclusivoSocios),
   costoSocios: numero(c.costoSocios),
   costoNoSocios: numero(c.costoNoSocios),
+  pagoObligatorio: Boolean(c.pagoObligatorio),
+  instruccionesPago: texto(c.instruccionesPago),
   entregaMaterial: Boolean(c.entregaMaterial),
   entregaCertificado: Boolean(c.entregaCertificado),
   asistenciaMinima: numero(c.asistenciaMinima ?? 75),
@@ -99,3 +103,7 @@ export const usaLink = (modalidad) => modalidad === 'virtual' || modalidad === '
 export const clasesRequeridas = (totalClases, porcentaje) => Math.ceil((totalClases * Number(porcentaje)) / 100);
 
 export const linkInscripcion = (slug, origen = window.location.origin) => `${origen}/inscripcion/${slug}`;
+
+// Si con estos costos alguien tiene que pagar (para mostrar las opciones de pago)
+export const tieneCosto = (form) =>
+  Number(form.costoSocios) > 0 || (!form.exclusivoSocios && Number(form.costoNoSocios) > 0);

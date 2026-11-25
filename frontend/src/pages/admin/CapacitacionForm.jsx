@@ -12,6 +12,7 @@ import {
   aFormulario,
   clasesRequeridas,
   linkInscripcion,
+  tieneCosto,
   valoresIniciales,
 } from '../../utils/capacitacionForm.js';
 import ClasesEditor from '../../components/capacitaciones/ClasesEditor.jsx';
@@ -181,6 +182,33 @@ function CapacitacionForm() {
           )}
 
           <p className="campo__ayuda cap-form__ancho">Dejá el costo vacío si es sin costo. Los montos son en pesos.</p>
+
+          {tieneCosto(form) && (
+            <>
+              <label className="campo cap-form__ancho">
+                <span className="campo__etiqueta">Datos para el pago</span>
+                <textarea
+                  name="instruccionesPago"
+                  rows={4}
+                  value={form.instruccionesPago}
+                  onChange={cambiar}
+                  placeholder={'Alias: …\nCBU: …\nTitular: …'}
+                />
+                <span className="campo__ayuda">
+                  Se muestran en el formulario de inscripción a quienes tienen que pagar.
+                </span>
+              </label>
+              <label className="casilla cap-form__ancho">
+                <input type="checkbox" name="pagoObligatorio" checked={form.pagoObligatorio} onChange={cambiar} />
+                Exigir el comprobante de pago al inscribirse
+              </label>
+              <p className="campo__ayuda cap-form__ancho">
+                {form.pagoObligatorio
+                  ? 'Quien tenga que pagar no va a poder inscribirse sin adjuntar el comprobante.'
+                  : 'El comprobante es opcional: quien no lo adjunte queda con el pago pendiente.'}
+              </p>
+            </>
+          )}
         </fieldset>
 
         <fieldset className="cap-form__seccion">

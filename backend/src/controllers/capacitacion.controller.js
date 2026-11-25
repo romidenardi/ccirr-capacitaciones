@@ -12,6 +12,8 @@ const CAMPOS = [
   'exclusivoSocios',
   'costoSocios',
   'costoNoSocios',
+  'pagoObligatorio',
+  'instruccionesPago',
   'entregaMaterial',
   'entregaCertificado',
   'asistenciaMinima',

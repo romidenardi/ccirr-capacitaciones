@@ -225,3 +225,14 @@ a {
 .tabla-contenedor {
   overflow-x: auto;
 }
+
+.estado--revisar {
+  background: #fff4d6;
+  color: #7a5200;
+}
+
+.mensaje-aviso {
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #d9a400;
+  background: #fff8e5;
+}

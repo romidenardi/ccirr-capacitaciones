@@ -26,7 +26,7 @@ export const normalizarClase = (clase) => {
   return limpia;
 };
 
-const TEXTOS_OPCIONALES = ['temario', 'disertantes'];
+const TEXTOS_OPCIONALES = ['temario', 'disertantes', 'instruccionesPago'];
 const NUMEROS_OPCIONALES = ['costoSocios', 'costoNoSocios', 'cupo'];
 
 export const normalizarCapacitacion = (datos, actual = {}) => {

@@ -14,6 +14,8 @@ const Empresa = sequelize.define(
     // Para el acceso de empresas: ahí se envía el link para ver a su personal inscripto
     emailContacto: { type: DataTypes.STRING(200), allowNull: true, validate: { isEmail: true } },
     esSocia: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+    // Creada automáticamente desde una inscripción: hay que revisar el nombre y si es socia
+    pendienteRevision: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
   },
   { tableName: 'empresas' },
 );

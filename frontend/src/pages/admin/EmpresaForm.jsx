@@ -95,6 +95,13 @@ function EmpresaForm() {
       </p>
       <h1>{esNueva ? 'Nueva empresa' : empresa.nombre}</h1>
 
+      {!esNueva && empresa.pendienteRevision && (
+        <p className="mensaje-aviso">
+          Esta empresa se creó automáticamente desde una inscripción. Revisá el nombre y si es socia, y después desmarcá
+          «Pendiente de revisión».
+        </p>
+      )}
+
       <form onSubmit={guardar} noValidate>
         <fieldset className="cap-form__seccion">
           <legend>Datos de la empresa</legend>
@@ -132,6 +139,13 @@ function EmpresaForm() {
             <input type="checkbox" name="esSocia" checked={form.esSocia} onChange={cambiar} />
             Es socia del CCIRR
           </label>
+
+          {!esNueva && (
+            <label className="casilla cap-form__ancho">
+              <input type="checkbox" name="pendienteRevision" checked={form.pendienteRevision} onChange={cambiar} />
+              Pendiente de revisión
+            </label>
+          )}
         </fieldset>
 
         {error && (

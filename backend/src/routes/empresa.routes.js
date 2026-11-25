@@ -21,7 +21,7 @@ const commonRules = [
     .custom(cuitValido)
     .withMessage('El CUIT no es válido. Revisá los números.'),
   body('emailContacto').optional({ values: 'falsy' }).isEmail().withMessage('El mail de contacto no es válido.'),
-  body('esSocia').optional().isBoolean().withMessage('Valor no válido.'),
+  body(['esSocia', 'pendienteRevision']).optional().isBoolean().withMessage('Valor no válido.'),
 ];
 
 const createRules = [
