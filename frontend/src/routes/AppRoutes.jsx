@@ -5,6 +5,9 @@ import Inicio from '../pages/Inicio.jsx';
 import Login from '../pages/Login.jsx';
 import Capacitaciones from '../pages/admin/Capacitaciones.jsx';
 import CapacitacionForm from '../pages/admin/CapacitacionForm.jsx';
+import Inscriptos from '../pages/admin/Inscriptos.jsx';
+import InscripcionDetalle from '../pages/admin/InscripcionDetalle.jsx';
+import Asistencia from '../pages/admin/Asistencia.jsx';
 import Inscripcion from '../pages/publico/Inscripcion.jsx';
 import MiInscripcion from '../pages/asistentes/MiInscripcion.jsx';
 import AccesoEmpresas from '../pages/empresas/Empresas.jsx';
@@ -28,6 +31,10 @@ function AppRoutes() {
           <Route path="/admin/capacitaciones" element={<Capacitaciones />} />
           <Route path="/admin/capacitaciones/nueva" element={<CapacitacionForm />} />
           <Route path="/admin/capacitaciones/:id" element={<CapacitacionForm />} />
+          <Route path="/admin/capacitaciones/:id/inscriptos" element={<Inscriptos />} />
+          <Route path="/admin/capacitaciones/:id/inscriptos/nueva" element={<InscripcionDetalle />} />
+          <Route path="/admin/capacitaciones/:id/inscriptos/:inscripcionId" element={<InscripcionDetalle />} />
+          <Route path="/admin/capacitaciones/:id/asistencia" element={<Asistencia />} />
           <Route path="/admin/empresas" element={<Empresas />} />
           <Route path="/admin/empresas/nueva" element={<EmpresaForm />} />
           <Route path="/admin/empresas/:id" element={<EmpresaForm />} />

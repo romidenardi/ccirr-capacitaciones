@@ -236,3 +236,31 @@ a {
   border-left: 4px solid #d9a400;
   background: #fff8e5;
 }
+
+.estado--atencion {
+  background: #e3effc;
+  color: #1d4f8a;
+}
+
+.boton--chico {
+  padding: 0.375rem 0.875rem;
+  font-size: 0.9375rem;
+}
+
+.boton--peligro {
+  background: #b03a2e;
+}
+
+.boton--peligro:hover {
+  background: #8c2c22;
+}
+
+.tabla tbody tr:hover {
+  background: var(--fondo-suave);
+}
+
+.tabla__secundario {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--texto-suave);
+}

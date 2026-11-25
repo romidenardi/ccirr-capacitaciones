@@ -1,0 +1,38 @@
+.pestanas {
+  display: flex;
+  gap: 0.25rem;
+  margin: 0 0 2rem;
+  border-bottom: 1px solid var(--borde);
+  overflow-x: auto;
+}
+
+.pestanas a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  color: var(--texto-suave);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pestanas a:hover {
+  color: var(--verde-oscuro);
+}
+
+.pestanas a.active {
+  color: var(--verde-oscuro);
+  border-bottom-color: var(--verde-claro);
+}
+
+.pestanas__cantidad {
+  min-width: 1.5rem;
+  padding: 0 0.375rem;
+  border-radius: 999px;
+  background: var(--fondo-suave);
+  font-size: 0.8125rem;
+  text-align: center;
+}

@@ -1,0 +1,109 @@
+.gestion__resumen {
+  margin: 0;
+}
+
+.gestion__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Ficha de una inscripción */
+.ficha {
+  max-width: 48rem;
+}
+
+.ficha__panel {
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--borde);
+  border-left: 4px solid var(--verde-claro);
+  border-radius: var(--radio);
+}
+
+.ficha__panel h2 {
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+}
+
+.ficha__fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.ficha__fila:last-child {
+  margin-bottom: 0;
+}
+
+.ficha__monto {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.ficha__rechazo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.ficha__archivo {
+  font-size: 0.9375rem;
+}
+
+/* Grilla de asistencia */
+.asistencia th,
+.asistencia td {
+  text-align: center;
+}
+
+.asistencia th:first-child,
+.asistencia td:first-child {
+  text-align: left;
+  position: sticky;
+  left: 0;
+  background: #fff;
+  z-index: 1;
+}
+
+.asistencia tbody tr:hover td:first-child {
+  background: var(--fondo-suave);
+}
+
+.asistencia__clase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 700;
+}
+
+.asistencia__fecha {
+  font-weight: 400;
+}
+
+.asistencia__todos {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--verde);
+  font: inherit;
+  font-size: 0.8125rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.asistencia input[type='checkbox'] {
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: var(--verde);
+  cursor: pointer;
+}
+
+.asistencia__total {
+  font-weight: 700;
+  white-space: nowrap;
+}

@@ -16,6 +16,7 @@ import {
   valoresIniciales,
 } from '../../utils/capacitacionForm.js';
 import ClasesEditor from '../../components/capacitaciones/ClasesEditor.jsx';
+import Pestanas from '../../components/capacitaciones/Pestanas.jsx';
 import './CapacitacionForm.css';
 
 // Alta (/admin/capacitaciones/nueva) y edición (/admin/capacitaciones/:id) de una capacitación
@@ -108,6 +109,7 @@ function CapacitacionForm() {
         <Link to="/admin/capacitaciones">Volver a capacitaciones</Link>
       </p>
       <h1>{esNueva ? 'Nueva capacitación' : capacitacion.nombre}</h1>
+      {!esNueva && <Pestanas id={id} />}
 
       {!esNueva && (
         <div className="cap-form__link">
