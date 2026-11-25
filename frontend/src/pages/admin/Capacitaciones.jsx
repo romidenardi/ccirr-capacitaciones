@@ -2,7 +2,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCapacitaciones } from '../../api/capacitaciones.api.js';
 import { mensajeDeError } from '../../api/axios.js';
-import { formatearFecha, formatearHora, formatearModalidad, formatearEstado } from '../../utils/formato.js';
+import { formatearFechaCorta, formatearModalidades, formatearEstado } from '../../utils/formato.js';
+
+// "10/12/2026" o, si dura varios días, "10/12/2026 al 17/12/2026"
+const periodo = (c) =>
+  c.fechaInicio === c.fechaFin
+    ? formatearFechaCorta(c.fechaInicio)
+    : `${formatearFechaCorta(c.fechaInicio)} al ${formatearFechaCorta(c.fechaFin)}`;
 
 // Listado de capacitaciones (administración)
 function Capacitaciones() {
@@ -40,7 +46,7 @@ function Capacitaciones() {
               <tr>
                 <th>Nombre</th>
                 <th>Fecha</th>
-                <th>Horario</th>
+                <th>Clases</th>
                 <th>Modalidad</th>
                 <th>Inscriptos</th>
                 <th>Estado</th>
@@ -52,9 +58,9 @@ function Capacitaciones() {
                   <td>
                     <Link to={`/admin/capacitaciones/${c.id}`}>{c.nombre}</Link>
                   </td>
-                  <td>{formatearFecha(c.fecha)}</td>
-                  <td>{formatearHora(c.horaInicio)}</td>
-                  <td>{formatearModalidad(c.modalidad)}</td>
+                  <td>{periodo(c)}</td>
+                  <td>{c.cantidadClases}</td>
+                  <td>{formatearModalidades(c.modalidades)}</td>
                   <td>
                     {c.inscriptos ?? 0}
                     {c.cupo ? ` / ${c.cupo}` : ''}

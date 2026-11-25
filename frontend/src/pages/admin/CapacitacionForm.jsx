@@ -7,7 +7,14 @@ import {
   updateCapacitacion,
 } from '../../api/capacitaciones.api.js';
 import { mensajeDeError } from '../../api/axios.js';
-import { VALORES_INICIALES, aFormulario, usaLink, usaLugar, linkInscripcion } from '../../utils/capacitacionForm.js';
+import {
+  aEnvio,
+  aFormulario,
+  clasesRequeridas,
+  linkInscripcion,
+  valoresIniciales,
+} from '../../utils/capacitacionForm.js';
+import ClasesEditor from '../../components/capacitaciones/ClasesEditor.jsx';
 import './CapacitacionForm.css';
 
 // Alta (/admin/capacitaciones/nueva) y edición (/admin/capacitaciones/:id) de una capacitación
@@ -17,7 +24,7 @@ function CapacitacionForm() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [form, setForm] = useState(VALORES_INICIALES);
+  const [form, setForm] = useState(valoresIniciales);
   const [capacitacion, setCapacitacion] = useState(null);
   const [cargando, setCargando] = useState(!esNueva);
   const [guardando, setGuardando] = useState(false);
@@ -44,6 +51,11 @@ function CapacitacionForm() {
     setAviso('');
   };
 
+  const cambiarClases = (clases) => {
+    setForm((actual) => ({ ...actual, clases }));
+    setAviso('');
+  };
+
   const guardar = async (event) => {
     event.preventDefault();
     setError('');
@@ -51,10 +63,10 @@ function CapacitacionForm() {
     setGuardando(true);
     try {
       if (esNueva) {
-        const creada = await createCapacitacion(form);
+        const creada = await createCapacitacion(aEnvio(form));
         navigate(`/admin/capacitaciones/${creada.id}`, { replace: true, state: { creada: true } });
       } else {
-        const actualizada = await updateCapacitacion(id, form);
+        const actualizada = await updateCapacitacion(id, aEnvio(form));
         setCapacitacion(actualizada);
         setForm(aFormulario(actualizada));
         setAviso('Cambios guardados.');
@@ -116,50 +128,15 @@ function CapacitacionForm() {
           </label>
 
           <label className="campo">
-            <span className="campo__etiqueta">Fecha</span>
-            <input type="date" name="fecha" value={form.fecha} onChange={cambiar} required />
-          </label>
-
-          <div className="cap-form__par">
-            <label className="campo">
-              <span className="campo__etiqueta">Desde</span>
-              <input type="time" name="horaInicio" value={form.horaInicio} onChange={cambiar} required />
-            </label>
-            <label className="campo">
-              <span className="campo__etiqueta">Hasta (opcional)</span>
-              <input type="time" name="horaFin" value={form.horaFin} onChange={cambiar} />
-            </label>
-          </div>
-
-          <label className="campo">
-            <span className="campo__etiqueta">Modalidad</span>
-            <select name="modalidad" value={form.modalidad} onChange={cambiar}>
-              <option value="presencial">Presencial</option>
-              <option value="virtual">Virtual</option>
-              <option value="hibrida">Híbrida</option>
-            </select>
-          </label>
-
-          <label className="campo">
             <span className="campo__etiqueta">Cupo (opcional)</span>
             <input type="number" name="cupo" min="1" step="1" value={form.cupo} onChange={cambiar} />
             <span className="campo__ayuda">Vacío = sin límite de inscriptos.</span>
           </label>
+        </fieldset>
 
-          {usaLugar(form.modalidad) && (
-            <label className="campo cap-form__ancho">
-              <span className="campo__etiqueta">Lugar</span>
-              <input name="lugar" value={form.lugar} onChange={cambiar} maxLength={200} />
-            </label>
-          )}
-
-          {usaLink(form.modalidad) && (
-            <label className="campo cap-form__ancho">
-              <span className="campo__etiqueta">Link de acceso virtual</span>
-              <input type="url" name="linkVirtual" value={form.linkVirtual} onChange={cambiar} placeholder="https://" />
-              <span className="campo__ayuda">Se envía por mail a las personas inscriptas. Podés cargarlo después.</span>
-            </label>
-          )}
+        <fieldset className="cap-form__seccion">
+          <legend>Clases</legend>
+          <ClasesEditor clases={form.clases} onChange={cambiarClases} />
         </fieldset>
 
         <fieldset className="cap-form__seccion">
@@ -216,6 +193,25 @@ function CapacitacionForm() {
             <input type="checkbox" name="entregaCertificado" checked={form.entregaCertificado} onChange={cambiar} />
             Entrega certificado
           </label>
+          {form.entregaCertificado && (
+            <label className="campo">
+              <span className="campo__etiqueta">Asistencia mínima para el certificado (%)</span>
+              <input
+                type="number"
+                name="asistenciaMinima"
+                min="1"
+                max="100"
+                step="1"
+                value={form.asistenciaMinima}
+                onChange={cambiar}
+              />
+              <span className="campo__ayuda">
+                {form.asistenciaMinima
+                  ? `Con ${form.clases.length} ${form.clases.length === 1 ? 'clase' : 'clases'}, tiene que asistir al menos a ${clasesRequeridas(form.clases.length, form.asistenciaMinima)}.`
+                  : 'Vacío = tiene que asistir a todas las clases.'}
+              </span>
+            </label>
+          )}
         </fieldset>
 
         <fieldset className="cap-form__seccion">

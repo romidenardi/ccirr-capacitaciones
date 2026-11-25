@@ -27,18 +27,13 @@ Content-Type: application/json
 GET {{api}}/api/capacitaciones
 Authorization: Bearer {{token}}
 
-### Crear una capacitación de prueba
+### Crear una capacitación de prueba (3 clases)
 POST {{api}}/api/capacitaciones
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
   "nombre": "Liderazgo de equipos comerciales",
-  "fecha": "2026-12-10",
-  "horaInicio": "18:30",
-  "horaFin": "20:30",
-  "modalidad": "presencial",
-  "lugar": "Salón del CCIRR",
   "temario": "Roles en el equipo\nFeedback\nObjetivos comerciales",
   "disertantes": "A definir",
   "exclusivoSocios": false,
@@ -46,5 +41,11 @@ Content-Type: application/json
   "costoNoSocios": 15000,
   "entregaMaterial": true,
   "entregaCertificado": true,
-  "estado": "publicada"
+  "asistenciaMinima": 75,
+  "estado": "publicada",
+  "clases": [
+    { "fecha": "2027-03-02", "horaInicio": "18:30", "horaFin": "20:30", "modalidad": "presencial", "lugar": "Salón del CCIRR" },
+    { "fecha": "2027-03-09", "horaInicio": "18:30", "horaFin": "20:30", "modalidad": "virtual", "linkVirtual": "https://meet.google.com/abc-defg-hij" },
+    { "fecha": "2027-03-18", "horaInicio": "09:00", "horaFin": "13:00", "modalidad": "presencial", "lugar": "Planta de empresa socia", "tema": "Visita y cierre" }
+  ]
 }

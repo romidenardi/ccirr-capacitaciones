@@ -1,12 +1,16 @@
 import sequelize from '../config/database.js';
 import Capacitacion from './capacitacion.model.js';
+import Clase from './clase.model.js';
 import Material from './material.model.js';
 import Empresa from './empresa.model.js';
 import Inscripcion from './inscripcion.model.js';
 import Usuario from './usuario.model.js';
 
-// Una capacitación tiene material e inscripciones. Al borrarla se borra su material, pero no si
-// tiene inscripciones (RESTRICT): primero hay que cancelarla o borrar las inscripciones a mano.
+// Una capacitación tiene clases, material e inscripciones. Al borrarla se borran sus clases y su material, pero no se puede
+// borrar si tiene inscripciones (RESTRICT): primero hay que cancelarla o borrar las inscripciones a mano.
+Capacitacion.hasMany(Clase, { as: 'clases', foreignKey: 'capacitacionId', onDelete: 'CASCADE' });
+Clase.belongsTo(Capacitacion, { foreignKey: 'capacitacionId' });
+
 Capacitacion.hasMany(Material, { as: 'materiales', foreignKey: 'capacitacionId', onDelete: 'CASCADE' });
 Material.belongsTo(Capacitacion, { foreignKey: 'capacitacionId' });
 
@@ -16,4 +20,4 @@ Inscripcion.belongsTo(Capacitacion, { foreignKey: 'capacitacionId' });
 Empresa.hasMany(Inscripcion, { as: 'inscripciones', foreignKey: 'empresaId', onDelete: 'SET NULL' });
 Inscripcion.belongsTo(Empresa, { foreignKey: 'empresaId' });
 
-export { sequelize, Capacitacion, Material, Empresa, Inscripcion, Usuario };
+export { sequelize, Capacitacion, Clase, Material, Empresa, Inscripcion, Usuario };

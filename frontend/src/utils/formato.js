@@ -21,5 +21,21 @@ export const formatearCosto = (valor) => {
 const MODALIDADES = { presencial: 'Presencial', virtual: 'Virtual', hibrida: 'Híbrida' };
 export const formatearModalidad = (modalidad) => MODALIDADES[modalidad] || modalidad;
 
+// Resumen de las modalidades de todas las clases ("presencial,virtual" → "Combinada")
+export const formatearModalidades = (lista) => {
+  const modalidades = String(lista || '')
+    .split(',')
+    .filter(Boolean);
+  if (modalidades.length === 0) return '';
+  return modalidades.length === 1 ? formatearModalidad(modalidades[0]) : 'Combinada';
+};
+
+// Fecha corta para listados: "10/12/2026"
+export const formatearFechaCorta = (iso) => {
+  if (!iso) return '';
+  const [anio, mes, dia] = iso.split('-');
+  return `${dia}/${mes}/${anio}`;
+};
+
 const ESTADOS = { borrador: 'Borrador', publicada: 'Publicada', finalizada: 'Finalizada', cancelada: 'Cancelada' };
 export const formatearEstado = (estado) => ESTADOS[estado] || estado;
