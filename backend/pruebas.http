@@ -1,0 +1,29 @@
+### Pedidos de prueba para la API. Con la extensión "REST Client" de VS Code aparece
+### un link "Send Request" arriba de cada uno: al hacer clic, se ve la respuesta al costado.
+
+### Estado del servidor
+GET http://localhost:3000/health
+
+### Listar capacitaciones
+GET http://localhost:3000/api/capacitaciones
+
+### Crear una capacitación de prueba
+POST http://localhost:3000/api/capacitaciones
+Content-Type: application/json
+
+{
+  "nombre": "Liderazgo de equipos comerciales",
+  "fecha": "2026-12-10",
+  "horaInicio": "18:30",
+  "horaFin": "20:30",
+  "modalidad": "presencial",
+  "lugar": "Salón del CCIRR",
+  "temario": "Roles en el equipo\nFeedback\nObjetivos comerciales",
+  "disertantes": "A definir",
+  "exclusivoSocios": false,
+  "costoSocios": null,
+  "costoNoSocios": 15000,
+  "entregaMaterial": true,
+  "entregaCertificado": true,
+  "estado": "publicada"
+}

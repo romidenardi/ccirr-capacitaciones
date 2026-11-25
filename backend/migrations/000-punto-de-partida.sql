@@ -1,0 +1,6 @@
+-- Punto de partida de las migraciones.
+-- Una base nueva se crea completa desde los modelos, así que este archivo no cambia nada:
+-- solo marca desde dónde se empieza a contar.
+--
+-- Para un cambio nuevo: crear 001-descripcion-corta.sql con las sentencias, cada una terminada
+-- en ";" al final de la línea, y modificar también el modelo (para que una base nueva lo tenga).
