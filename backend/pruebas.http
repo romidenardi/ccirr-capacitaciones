@@ -49,3 +49,20 @@ Content-Type: application/json
     { "fecha": "2027-03-18", "horaInicio": "09:00", "horaFin": "13:00", "modalidad": "presencial", "lugar": "Planta de empresa socia", "tema": "Visita y cierre" }
   ]
 }
+
+### Listar empresas (con búsqueda y filtro opcionales)
+GET {{api}}/api/empresas?q=&socia=
+Authorization: Bearer {{token}}
+
+### Crear una empresa
+POST {{api}}/api/empresas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Metalúrgica Ejemplo S.A.",
+  "rubro": "Industria metalúrgica",
+  "cuit": "20-12345678-6",
+  "emailContacto": "rrhh@ejemplo.com.ar",
+  "esSocia": true
+}
