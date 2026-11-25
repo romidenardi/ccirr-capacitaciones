@@ -4,6 +4,7 @@ dotenv.config();
 import app from './src/app.js';
 import { sequelize } from './src/models/index.js';
 import { runMigrations } from './src/db/migrations.js';
+import { crearAdminInicial } from './src/services/adminInicial.service.js';
 
 const PORT = process.env.PORT || 3000;
 const REQUIRED_ENV = ['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_HOST', 'DB_PORT', 'APP_URL', 'JWT_SECRET'];
@@ -38,6 +39,7 @@ const start = async () => {
 
     // Cambios de base pendientes (carpeta migrations/): se aplican antes de atender pedidos
     await runMigrations(sequelize);
+    await crearAdminInicial();
 
     server = app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
   } catch (error) {

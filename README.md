@@ -114,3 +114,24 @@ npm test
 
 Una base nueva se crea sola desde los modelos. Para cambiar una base que ya tiene datos, crear
 `backend/migrations/001-descripcion.sql` con las sentencias SQL y modificar también el modelo.
+
+## Publicación en la nube
+
+- **Backend y base de datos**: Railway. El servicio del backend usa `/backend` como carpeta raíz,
+  `/health` como verificación de estado y toma la conexión a MySQL de las variables del servicio MySQL.
+- **Frontend**: Vercel, con `frontend` como carpeta raíz. `VITE_API_URL` apunta al backend de Railway.
+- Cada `git push` a `main` vuelve a publicar los dos automáticamente.
+
+Variables del backend en Railway:
+
+| Variable                                        | Valor                                         |
+| ----------------------------------------------- | --------------------------------------------- |
+| `DB_HOST`                                       | `${{MySQL.MYSQLHOST}}`                        |
+| `DB_PORT`                                       | `${{MySQL.MYSQLPORT}}`                        |
+| `DB_NAME`                                       | `${{MySQL.MYSQLDATABASE}}`                    |
+| `DB_USER`                                       | `${{MySQL.MYSQLUSER}}`                        |
+| `DB_PASSWORD`                                   | `${{MySQL.MYSQLPASSWORD}}`                    |
+| `JWT_SECRET`                                    | una clave nueva (no la de tu compu)           |
+| `NODE_ENV`                                      | `production`                                  |
+| `APP_URL` y `CORS_ORIGIN`                       | la dirección del frontend en Vercel           |
+| `ADMIN_INICIAL_EMAIL` / `_PASSWORD` / `_NOMBRE` | solo para el primer arranque; después, borrar |

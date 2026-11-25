@@ -1,8 +1,11 @@
 {
   "name": "ccirr-capacitaciones-backend",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.1.0",
   "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
