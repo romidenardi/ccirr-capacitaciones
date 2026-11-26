@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
 import rateLimit from 'express-rate-limit';
-import { login, yo } from '../controllers/auth.controller.js';
+import { login, yo, cambiarPassword } from '../controllers/auth.controller.js';
 import { validate } from '../middlewares/validate.middleware.js';
-import { requireAuth } from '../middlewares/auth.middleware.js';
+import { requireAuthConPasswordTemporal } from '../middlewares/auth.middleware.js';
+import { LARGO_MINIMO_PASSWORD } from '../utils/passwordTemporal.js';
 
 const router = Router();
 
@@ -21,7 +22,15 @@ const loginRules = [
   body('password').notEmpty().withMessage('Escribí la contraseña.'),
 ];
 
+const cambioRules = [
+  body('actual').notEmpty().withMessage('Escribí tu contraseña actual.'),
+  body('nueva')
+    .isLength({ min: LARGO_MINIMO_PASSWORD })
+    .withMessage(`La contraseña nueva tiene que tener al menos ${LARGO_MINIMO_PASSWORD} caracteres.`),
+];
+
 router.post('/login', limiteLogin, loginRules, validate, login);
-router.get('/yo', requireAuth, yo);
+router.get('/yo', requireAuthConPasswordTemporal, yo);
+router.post('/cambiar-password', limiteLogin, requireAuthConPasswordTemporal, cambioRules, validate, cambiarPassword);
 
 export default router;

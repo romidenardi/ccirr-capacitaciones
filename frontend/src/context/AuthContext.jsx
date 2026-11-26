@@ -22,6 +22,13 @@ export function AuthProvider({ children }) {
     const { token, usuario } = await loginApi(email, password);
     localStorage.setItem(CLAVE_TOKEN, token);
     setUsuario(usuario);
+    return usuario;
+  }, []);
+
+  // Después de cambiar la contraseña, el backend entrega una sesión nueva (las anteriores dejan de valer)
+  const actualizarSesion = useCallback((token, usuario) => {
+    localStorage.setItem(CLAVE_TOKEN, token);
+    setUsuario(usuario);
   }, []);
 
   const logout = useCallback(() => {
@@ -29,7 +36,11 @@ export function AuthProvider({ children }) {
     setUsuario(null);
   }, []);
 
-  return <AuthContext.Provider value={{ usuario, verificando, login, logout }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ usuario, verificando, login, logout, actualizarSesion }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export const useAuth = () => useContext(AuthContext);

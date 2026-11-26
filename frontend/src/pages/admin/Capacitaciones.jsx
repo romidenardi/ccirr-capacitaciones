@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getCapacitaciones } from '../../api/capacitaciones.api.js';
 import { mensajeDeError } from '../../api/axios.js';
 import { formatearFechaCorta, formatearModalidades, formatearEstado } from '../../utils/formato.js';
@@ -15,6 +15,7 @@ function Capacitaciones() {
   const [capacitaciones, setCapacitaciones] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState('');
+  const location = useLocation();
 
   useEffect(() => {
     getCapacitaciones()
@@ -32,6 +33,7 @@ function Capacitaciones() {
         </Link>
       </div>
 
+      {location.state?.passwordCambiada && <p className="mensaje-ok">Tu contraseña se cambió correctamente.</p>}
       {cargando && <p className="texto-suave">Cargando…</p>}
       {error && <p className="mensaje-error">{error}</p>}
 

@@ -8,6 +8,8 @@ import CapacitacionForm from '../pages/admin/CapacitacionForm.jsx';
 import Inscriptos from '../pages/admin/Inscriptos.jsx';
 import InscripcionDetalle from '../pages/admin/InscripcionDetalle.jsx';
 import Asistencia from '../pages/admin/Asistencia.jsx';
+import Usuarios from '../pages/admin/Usuarios.jsx';
+import CambiarPassword from '../pages/CambiarPassword.jsx';
 import Inscripcion from '../pages/publico/Inscripcion.jsx';
 import MiInscripcion from '../pages/asistentes/MiInscripcion.jsx';
 import AccesoEmpresas from '../pages/empresas/Empresas.jsx';
@@ -28,6 +30,8 @@ function AppRoutes() {
 
         {/* Administración: piden sesión iniciada */}
         <Route element={<RutaProtegida />}>
+          <Route path="/cuenta/contrasena" element={<CambiarPassword />} />
+          <Route path="/admin/usuarios" element={<Usuarios />} />
           <Route path="/admin/capacitaciones" element={<Capacitaciones />} />
           <Route path="/admin/capacitaciones/nueva" element={<CapacitacionForm />} />
           <Route path="/admin/capacitaciones/:id" element={<CapacitacionForm />} />

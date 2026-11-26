@@ -17,3 +17,9 @@
 .login__form .mensaje-error {
   margin: 0;
 }
+
+.login__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

@@ -6,6 +6,7 @@ import capacitacionRoutes from './routes/capacitacion.routes.js';
 import empresaRoutes from './routes/empresa.routes.js';
 import publicoRoutes from './routes/publico.routes.js';
 import inscripcionRoutes from './routes/inscripcion.routes.js';
+import usuarioRoutes from './routes/usuario.routes.js';
 import { errorMiddleware } from './middlewares/error.middleware.js';
 import { sequelize } from './models/index.js';
 
@@ -42,6 +43,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/capacitaciones', capacitacionRoutes);
 app.use('/api/empresas', empresaRoutes);
 app.use('/api/publico', publicoRoutes);
+app.use('/api/usuarios', usuarioRoutes);
 app.use('/api', inscripcionRoutes);
 
 app.use((req, res) => res.status(404).json({ message: 'Ruta no encontrada.' }));

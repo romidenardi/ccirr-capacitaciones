@@ -30,7 +30,13 @@ try {
   const passwordHash = await bcrypt.hash(password, 12);
   const existente = await Usuario.findOne({ where: { email } });
   if (existente) {
-    await existente.update({ nombre, passwordHash, activo: true });
+    await existente.update({
+      nombre,
+      passwordHash,
+      activo: true,
+      debeCambiarPassword: false,
+      sesionVersion: existente.sesionVersion + 1,
+    });
     console.log(`Listo: se actualizó la contraseña de ${email}.`);
   } else {
     await Usuario.create({ nombre, email, passwordHash });

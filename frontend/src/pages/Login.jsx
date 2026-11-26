@@ -18,15 +18,15 @@ function Login() {
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState('');
 
-  if (usuario) return <Navigate to={destino} replace />;
+  if (usuario) return <Navigate to={usuario.debeCambiarPassword ? '/cuenta/contrasena' : destino} replace />;
 
   const ingresar = async (event) => {
     event.preventDefault();
     setError('');
     setEnviando(true);
     try {
-      await login(email, password);
-      navigate(destino, { replace: true });
+      const ingresado = await login(email, password);
+      navigate(ingresado.debeCambiarPassword ? '/cuenta/contrasena' : destino, { replace: true });
     } catch (err) {
       setError(mensajeDeError(err));
       setEnviando(false);

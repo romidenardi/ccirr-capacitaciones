@@ -20,7 +20,11 @@ function Layout() {
               <>
                 <NavLink to="/admin/capacitaciones">Capacitaciones</NavLink>
                 <NavLink to="/admin/empresas">Empresas</NavLink>
-                <button type="button" className="layout__salir" onClick={logout} title={`Sesión de ${usuario.nombre}`}>
+                <NavLink to="/admin/usuarios">Usuarios</NavLink>
+                <NavLink to="/cuenta/contrasena" title={`Sesión de ${usuario.nombre}`}>
+                  Mi contraseña
+                </NavLink>
+                <button type="button" className="layout__salir" onClick={logout}>
                   Salir
                 </button>
               </>

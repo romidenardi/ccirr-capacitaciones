@@ -25,6 +25,10 @@ api.interceptors.response.use(
         window.location.href = `/login?volver=${volver}`;
       }
     }
+    // Contraseña temporal sin cambiar: se manda a la pantalla para cambiarla
+    if (error.response?.data?.codigo === 'CAMBIAR_PASSWORD' && window.location.pathname !== '/cuenta/contrasena') {
+      window.location.href = '/cuenta/contrasena';
+    }
     return Promise.reject(error);
   },
 );
